@@ -1,26 +1,30 @@
-<!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" type="text/css" href="/style/css/mystyle.css">
+<!DOCTYPE HTML>
 <html>
-<body>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+ 
+
 <?php
-require_once 'session.php';
- 
-start_session();
- 
-if (isset($_POST['username'], $_POST['password'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password']; 
-    if (try_to_login($username, $password) == true) {
-        header(sprintf("Location: %s", $_SESSION['request_uri']));
-    } else {
-		// 이멜주소 또는 비번이 등록되지 않았거나 틀림
-        header('Location: error.php?error_code=1');
-    }
+if (isset($_POST['email'], $_POST['password'])) {
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	echo 'login.php';
+	if (try_to_login($email, $password) == true) {
+		echo '로그인 성공';
+		header('Location: dashboard/');
+	} else {
+		echo '로그인 실패';
+		header('Location: /');
+		//header('Location: error.php?error_code=1');
+	}
 } else {
-	echo $_POST['username'] . "<br>" . $_POST['password'];
-    echo '로그인 폼 에러';
+	echo 'login form error..!';
+	header('Location: /');
 }
 ?>
+
+<?php // footer ?>
 </body>
 </html>

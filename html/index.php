@@ -8,16 +8,23 @@
 
 </head>
 <body>
+<?php
 
+
+
+
+
+
+?>
 	<a href="/">login</a>
-	
- 
+
+
 		<div class="login">
 		
-			<form action="login_db.php" method="POST">
+			<form action="/login/login.php" method="POST">
 				<ul>
 					<li>
-						<input type="text" name="email" value="E-mail" onfocus="if(this.value =='E-mail') this.value=''" onblur="if(this.value =='') this.value='E-mail';">
+						<input type="text" name="email" value="ID" onfocus="if(this.value =='ID') this.value=''" onblur="if(this.value =='') this.value='ID';">
 					</li>
 					<li>
 						<input type="text" name="password" value="password" onfocus="if(this.value =='password') { this.value=''; this.type='password'; }" onblur="if(this.value =='') { this.value='password'; this.type='text'; }">

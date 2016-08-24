@@ -19,7 +19,7 @@
 		
 		<div class="content_wrap">		
 		<?php 
-			require_once($DOCUMENT_ROOT . "/menu2.php");
+			require_once($DOCUMENT_ROOT . "/menu.php");
 		?>	
 		<div id="main">
 			

@@ -9,12 +9,8 @@
 </head>
 <body>
 <?php
-
-
-
-
-
-
+$root = '.';
+include_once $root.'/../include/header.php';
 ?>
 	<a href="/">login</a>
 

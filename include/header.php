@@ -1,7 +1,8 @@
 <link rel="stylesheet" type="text/css" href="/css/head.css">
 
 <?php
-require_once $root.'/../include/host.php';
+$root = '.';
+require_once '/../include/host.php';
 start_session();
 ?>
 
@@ -11,9 +12,7 @@ if (check_login()) {  // 로그인
 	// 세션 : get_nick();
 	$conn = get_connection();
 ?>
-	<div class="floatleft">
-		<a href="/dashboard/">Leaf Tree</a>
-	</div>
+	
 	<div class="floatright">
 		<a href="/logout.php">logout</a>
 	</div>
@@ -30,15 +29,9 @@ if (check_login()) {  // 로그인
 <?php
 } else { // 비로그인
 ?>
-	<div class="title floatleft">
-		<a href="/">Leaf Tree</a>
-	</div>
-	<div class="floatright">
-		<a href="/register_form.php">register</a>
-	</div>
-	<div class="floatright">
-		<a href="/">login</a>
-	</div>
+	
+
+
 <?php
 }
 ?>

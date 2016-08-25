@@ -5,13 +5,16 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
  
-
 <?php
-if (isset($_POST['email'], $_POST['password'])) {
-	$email = $_POST['email'];
+$root = '.';
+include_once $root.'/../../include/header.php';
+?>
+<?php
+if (isset($_POST['ID'], $_POST['password'])) {
+	$ID = $_POST['ID'];
 	$password = $_POST['password'];
 	echo 'login.php';
-	if (try_to_login($email, $password) == true) {
+	if (try_to_login($ID, $password) == true) {
 		echo '로그인 성공';
 		header('Location: dashboard/');
 	} else {

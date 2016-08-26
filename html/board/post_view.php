@@ -167,28 +167,28 @@ function showMoreReplies(button) {
 	$hostname = 'kocia.cytzyor3ndjk.ap-northeast-2.rds.amazonaws.com';
 	$username = 'kimhyekwan';
 	$password = 'password';
-	$dbname = 'kimhyekwan';
+	$dbname = 'leaftree';
 	$conn = mysqli_connect($hostname, $username, $password, $dbname);
 	mysqli_query($conn, "SET NAMES 'utf8'");
 	if (!$conn) {
 		die('Mysql connection failed: '.mysqli_connect_error());
 	} 	
 	
-	$select_query = 'SELECT idpost,writer,title,content,last_update FROM post2';
+	$select_query = 'SELECT name, content FROM board';
 	// select 쿼리는 mysqli_query 함수의 반환값으로 결과를 받는다.
 	$result = mysqli_query($conn, $select_query);
 	while($row = mysqli_fetch_assoc($result)){
-		if($number === $row['idpost']){
+	
 			echo '</table>';
 			echo '<table>';
 			
-			echo '<tr>'.'<th>'.'번호 '.'</th>'.'<td>'.$row['idpost'].'</td>'.'</tr>';
-			echo '<tr>'.'<th>'.'제목 '.'</th>'.'<td>'.$row['title'].'</td>'.'</tr>';
-			echo '<tr>'.'<th>'.'글쓴이 '.'</th>'.'<td>'.$row['writer'].'</td>'.'</tr>';
+			
+			echo '<tr>'.'<th>'.'제목 '.'</th>'.'<td>'.$row['name'].'</td>'.'</tr>';
+		
 			echo '<tr>'.'<th>'.'내용 '.'</th>'.'<td>'.$row['content'].'</td>'.'</tr>';
 			echo '</table>';
-		}
 	}
+	
 	echo '<br>';
 	printf("<a href='board_delete.php?number=%d'><button>글삭제</button></a>", $number);
 	printf("<a href='modify_board.php?number=%d'><button>글수정</button></a><br>", $number);
@@ -200,7 +200,7 @@ function showMoreReplies(button) {
 </table>
 <table>
 	<tr><br>
-	<form action="board_index.php" method="post">
+	<form action="board_main.php" method="post">
 	<input type="submit" value="게시판으로">
 	</form>
 	</tr>
@@ -210,7 +210,7 @@ function showMoreReplies(button) {
 	$hostname = 'kocia.cytzyor3ndjk.ap-northeast-2.rds.amazonaws.com';
 	$username = 'kimhyekwan';
 	$password = 'password';
-	$dbname = 'kimhyekwan';
+	$dbname = 'leaftree';
 	$conn = mysqli_connect($hostname, $username, $password, $dbname);
 	mysqli_query($conn, "SET NAMES 'utf8'");
 	if (!$conn) {

@@ -7,16 +7,16 @@
  
 <?php
 $root = '.';
-include_once $root.'/../../include/header.php';
+include_once $root.'/../include/header.php';
 ?>
 <?php
 if (isset($_POST['ID'], $_POST['password'])) {
 	$ID = $_POST['ID'];
 	$password = $_POST['password'];
-	echo 'login.php';
+	
 	if (try_to_login($ID, $password) == true) {
 		echo '로그인 성공';
-		header('Location: dashboard/');
+		header('Location: board/');
 	} else {
 		echo '로그인 실패';
 		header('Location: /');

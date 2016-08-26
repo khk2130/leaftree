@@ -29,7 +29,7 @@
 		
 	
 		
-		
+	
 	
 		$insert_query = sprintf("INSERT INTO user(id, name, pw_hash) values('%s', '%s', '%s');", $ID, $name, $password);
 		if (mysqli_query($conn, $insert_query) === false) {

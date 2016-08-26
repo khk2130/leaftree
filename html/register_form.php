@@ -28,7 +28,7 @@
 					<input type="text" name="ID" value="ID" onfocus="if(this.value == 'ID') this.value=''" onblur="if(this.value == '') this.value='ID';">
 				</li>
 				<li>
-					<input type="text" name="nick" value="name" onfocus="if(this.value == 'name') this.value=''" onblur="if(this.value == '') this.value='name';">
+					<input type="text" name="name" value="name" onfocus="if(this.value == 'name') this.value=''" onblur="if(this.value == '') this.value='name';">
 				</li>
 				<li>
 					<input type="text" name="password" value="password" onfocus="if(this.value =='password') { this.value=''; this.type='password'; }" onblur="if(this.value =='') { this.value='password'; this.type='text'; }">

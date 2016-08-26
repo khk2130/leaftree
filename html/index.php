@@ -17,7 +17,7 @@ include_once $root.'/../include/header.php';
 
 		<div class="login">
 		
-			<form action="/login/login.php" method="POST">
+			<form action="login.php" method="POST">
 				<ul>
 					<li>
 						<input type="text" name="email" value="ID" onfocus="if(this.value =='ID') this.value=''" onblur="if(this.value =='') this.value='ID';">

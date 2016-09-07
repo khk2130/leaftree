@@ -8,19 +8,16 @@
 
 </head>
 <body>
-<?php
-$root = '.';
-include_once $root.'/../include/header.php';
-?>
+
 	<a href="/">login</a>
 
 
 		<div class="login">
 		
-			<form action="login.php" method="POST">
+			<form action="login/login.php" method="POST">
 				<ul>
 					<li>
-						<input type="text" name="email" value="ID" onfocus="if(this.value =='ID') this.value=''" onblur="if(this.value =='') this.value='ID';">
+						<input type="text" name="ID" value="ID" onfocus="if(this.value =='ID') this.value=''" onblur="if(this.value =='') this.value='ID';">
 					</li>
 					<li>
 						<input type="text" name="password" value="password" onfocus="if(this.value =='password') { this.value=''; this.type='password'; }" onblur="if(this.value =='') { this.value='password'; this.type='text'; }">

@@ -1,6 +1,4 @@
 <?php
-$mylib_path = $_SERVER['DOCUMENT_ROOT'] . '/../includes/mylib_bookies.php';
-require_once($mylib_path);
 
 
 // 하나의 페이지에서 한 번만 호출되어야 한다.
@@ -22,7 +20,7 @@ function start_session() {
         $httponly);
  
     session_start();
-    session_regenerate_id(true); // session fixation 대비
+    session_regenerate_id(); // session fixation 대비
 }
 
  // start_session 호출된 후에 사용되어야 한다
@@ -36,67 +34,47 @@ function destroy_session() {
 }
 
  // start_session 호출된 후에 사용되어야 한다
-function try_to_login($username, $password) {
-
-	if (check_user_account($username, $password)) {
+function try_to_login($id, $password) {
+	if (check_user_account($id, $password)) {
 		$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 		$_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-		$_SESSION['username'] = $username;
+		$_SESSION['id'] = $id;
 		$_SESSION['password'] = $password;
-		$_SESSION['name'] = get_name($username); 	// *현재는 이름만 가져옴(추후 수정 가능성 있음.)
 		$_SESSION['login_status'] = true;
-		
-		if($_SESSION['username'] == "admin"){		// 관리자 계정의 경우 관리자모드 on.
-			$_SESSION['admin_mode'] = true;
-		}else {
-			$_SESSION['admin_mode'] = false;
-		}
-
 		return true;
 	} else {
 		return false;
 	}
 }
-
-function check_user_account($username, $password) {
-
-	$conn = get_mysql_conn();
-	$stmt = mysqli_prepare($conn, "SELECT password_hash FROM member WHERE username = ?");
-	mysqli_stmt_bind_param($stmt, "s", $username);
+function get_db_connection() {
+		$hostname='kocia.cytzyor3ndjk.ap-northeast-2.rds.amazonaws.com';
+		$username='kimhyekwan';
+		$password='password';
+		$dbname='leaftree';
+		
+		$conn=mysqli_connect($hostname, $username, $password, $dbname);
+		mysqli_query($conn, "SET NAMES 'utf8'");
+		if (!($conn)) {
+			die('Mysql connection failed: '.mysqli_connect_error());
+		} 
+		return $conn;
+	}
+function check_user_account($id, $password) {
+	$conn = get_db_connection();
+	$stmt = mysqli_prepare($conn, "SELECT pw_hash FROM user WHERE id = ?");
+	mysqli_stmt_bind_param($stmt, "s", $id);
 	mysqli_stmt_execute($stmt);
 	$result = mysqli_stmt_get_result($stmt);
-	if (mysqli_num_rows($result) === 0) { // 등록되지 않은 아이디	
-		mysqli_free_result($result);
-		mysqli_close($conn);	
+	if (mysqli_num_rows($result) === 0) { // 등록되지 않은 아이디
 		header('Location: error.php?error_code=1');
 	} else {
 		$row = mysqli_fetch_assoc($result);
-		$hash = $row["password_hash"];		
-		
-		mysqli_free_result($result);
-		mysqli_close($conn);	
-		
+		$hash = $row["pw_hash"];
 		return password_verify($password, $hash);
 	}
-}
-
-function get_name($username) {
-	$conn = get_mysql_conn();
-	$stmt = mysqli_prepare($conn, "SELECT name FROM member WHERE username = ?");
-	mysqli_stmt_bind_param($stmt, "s", $username);
-	mysqli_stmt_execute($stmt);
-	
-	$result = mysqli_stmt_get_result($stmt);
-	$row = mysqli_fetch_assoc($result);
-	$name = $row["name"];
-	
 	mysqli_free_result($result);
 	mysqli_close($conn);	
-	
-	return $name;
 }
-
-
 
 // start_session 호출된 후에 사용되어야 한다
 function check_login() {
